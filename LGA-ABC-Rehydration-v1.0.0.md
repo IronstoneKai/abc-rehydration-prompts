@@ -146,17 +146,79 @@ abc-rehydration-prompts/
 ---
 
 ## 🚀 8. Bootstrap Usage
-When starting a new ABC conversation, paste this block as the first message:
 
+### 🧩 8.1 — When and How to Use This Prompt
+Use this document whenever you open a new ChatGPT / ABC session and need to restore the full state of the LGA program. You can think of this as “loading your operating context.”
+
+#### 🪄 Startup Steps
+- Copy the entire contents of the current rehydration file (`LGA-ABC-Rehydration-vX.Y.Z.md`).
+- Paste it as the first message in a new ABC conversation with ChatGPT (before saying anything else).
+- The prompt tells the model:
+    - Which repositories and canonical files to treat as context (`lga-frontend`, `agentic-business-os`, etc.).
+    - How to interpret roles (Codex-Frontend, Codex-OS, ABC Agent, human CLI).
+    - How to enforce `.codexrules.json`.
+    - Which phase of the program is currently complete, and which one is active.
+- Once the assistant confirms initialization, you can continue work exactly from where the previous session ended.
+
+> [!TIP]
+> You may shorten the paste to only the `[BEGIN ABC REHYDRATION PROMPT]` block if you’ve already uploaded the canonical document file as a reference in the chat; however, for full continuity it’s safest to paste the entire document.
+
+### 🪪 8.2 — Maintaining Version Continuity
+Every major milestone (for example, after finishing Phase 5 or adopting a new ADR) should produce a new rehydration version in your `abc-rehydration-prompts` repository.
+
+#### 📈 Update Procedure
+1. **Duplicate the latest file**:
+   ```bash
+   cp LGA-ABC-Rehydration-v1.0.0.md LGA-ABC-Rehydration-v1.1.0.md
+   ```
+2. **Edit the new file**:
+   - Update the Version, Date, and Completed Phases tables.
+   - Append or modify any new rules, canonical file paths, or workflow changes.
+3. **Commit and tag**:
+   ```bash
+   git add LGA-ABC-Rehydration-v1.1.0.md
+   git commit -m "v1.1.0 – Phase-5 bootstrap and ADR-031 initialization"
+   git push origin main
+   git tag -a v1.1.0 -m "Phase-5 rehydration update"
+   git push origin v1.1.0
+   ```
+4. **Record the change in `CHANGELOG.md`**.
+5. **Use the latest tag when starting any new session.**
+
+### 🔄 8.3 — Recommended Workflow for New Sessions
+| Step | Action | CLI / Chat |
+|------|--------|------------|
+| 1 | Pull latest rehydration repo | `git pull origin main` |
+| 2 | Open the newest file (e.g. v1.1.0) | — |
+| 3 | Copy full markdown or `[BEGIN … END PROMPT]` block | — |
+| 4 | Paste into new ABC session | Chat |
+| 5 | Verify that assistant lists all canonical repos and current phase | Chat |
+| 6 | Begin next phase or task | CLI + Chat |
+
+### 🧭 8.4 — Archiving Older Versions
+- Keep all historical versions in `abc-rehydration-prompts`.
+- Each version acts as a precise snapshot of the project’s state at that time (similar to a “governance checkpoint”).
+- Older versions must never be edited, only superseded.
+
+### 🧾 8.5 — Summary of Lifecycle Rules
+| Action | Trigger | Result |
+|--------|---------|--------|
+| Finish a phase & approve PR merge | Close of Phase X | Create next vX+1.0 file |
+| New ADR accepted | Immediately | Increment minor version |
+| Major architectural pivot | Rare | Increment major version |
+| Beginning a new ChatGPT conversation | Always | Paste latest file’s contents |
+| Assistant becomes slow or loses context | Optional | Generate new minor revision with updated canonical state |
+
+### ✅ Quick Bootstrap Snippet (to paste at session start)
 ```text
 [BEGIN ABC REHYDRATION PROMPT]
 Load canonical repositories:
-- lga-frontend (paths listed above)
-- agentic-business-os (paths listed above)
-
-Enforce .codexrules.json for agent boundaries.
-Assume Phase 4 completed and Phase 5 planned.
+- lga-frontend (engineering)
+- agentic-business-os (governance)
+Apply .codexrules.json to enforce role boundaries.
+Assume all phases ≤ 4 complete; Phase 5 (“Lead Assimilation & External Sync”) planned.
 You are ABC Agent orchestrating Codex-Frontend (engineering) and Codex-OS (governance) with human CLI validation.
+Use version LGA-ABC-Rehydration-v1.0.0 as canonical baseline.
 [END PROMPT]
 ```
 
