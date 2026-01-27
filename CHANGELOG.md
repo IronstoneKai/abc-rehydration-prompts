@@ -9,6 +9,13 @@ All notable changes to the rehydration prompts will be documented in this file.
 - **Simplified Local Sandbox Reset**: Integrated `npm run db:reset` as the canonical entrypoint for CLI validation, automating Docker startup, migrations, and reseeding.
 - **Strategic Summary**: Added a comparison table for the workflow improvements.
 
+## [v1.2.0] — 2026-01-27
+### Added
+- **Production Environment Integration**: Dual-mode `.env.local` support for toggling between local sandbox and remote live production.
+- **Unified Schema Governance**: Protocols for locking local and remote schema baselines (ADR-036).
+- **Live E2E Validation**: Formal checklist for verifying remote connectivity and orchestration telemetery safely.
+- **Updated Canonical References**: Added `remote_verified_baseline_20260127.sql` and `ADR-035` promotion.
+
 ### 🧭 Strategic Summary
 | Category | Old Workflow | Improved Workflow |
 |-----------|---------------|-------------------|
