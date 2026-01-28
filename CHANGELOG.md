@@ -16,6 +16,13 @@ All notable changes to the rehydration prompts will be documented in this file.
 - **Live E2E Validation**: Formal checklist for verifying remote connectivity and orchestration telemetery safely.
 - **Updated Canonical References**: Added `remote_verified_baseline_20260127.sql` and `ADR-035` promotion.
 
+## [v1.3.0] — 2026-01-28
+### Added
+- **Supabase DevOps Discipline (ADR-036)**: Establishes strict rules for schema management, ensuring GitHub is the single source of truth.
+- **Branch-Based Development**: Linked validation to Supabase branch `orchestration-alignment-v8`.
+- **E2E Orchestration Validation**: Comprehensive 6-step protocol for validating runtime agent triggering via Fly.io.
+- **Updated Environment Dichotomy**: Clarified roles of local sandbox vs. remote live environment with branch connectivity.
+
 ### 🧭 Strategic Summary
 | Category | Old Workflow | Improved Workflow |
 |-----------|---------------|-------------------|
