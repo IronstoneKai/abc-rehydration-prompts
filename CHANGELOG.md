@@ -23,12 +23,12 @@ All notable changes to the rehydration prompts will be documented in this file.
 - **E2E Orchestration Validation**: Comprehensive 6-step protocol for validating runtime agent triggering via Fly.io.
 - **Updated Environment Dichotomy**: Clarified roles of local sandbox vs. remote live environment with branch connectivity.
 
-## [v1.4.0] — 2026-01-29
+## [v1.4.0] — 2026-01-30
 ### Added
-- **Discovery Insights Persistence**: Expanded schema support for AI outputs (`summary`, `details`, `model`) via `public.discovery_insights`.
-- **Runtime Telemetry & Alerting (ADR-038)**: New telemetry events for runtime execution and failure tracking.
-- **Dynamic Configuration**: Introduced `public.runtime_configs` for managing model versions and prompts dynamically.
-- **Phase 7 Context**: Active support for "Runtime Discovery Persistence" phase.
+- **Data Quality & Lead Verification**: Phase 7 focus on validating runtime agents populating verifiable company and lead data.
+- **Extended Discovery Schema**: Updates to `discovery_insights` and `discovery_leads` for verified metadata (website, employees, LinkedIn).
+- **Lead Volume Increase**: Extended discovery results from 3 to 5 leads per campaign.
+- **Business Model Alignment**: Explicit linkage to multi-tenant design and verification layer credibility.
 
 ### 🧭 Strategic Summary
 | Category | Old Workflow | Improved Workflow |
